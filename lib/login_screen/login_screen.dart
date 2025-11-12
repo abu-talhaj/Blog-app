@@ -1,8 +1,10 @@
 import 'package:final_project/blog_home_screen/home_screen.dart';
 import 'package:final_project/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
+import 'package:final_project/login_register_logout_change_password_api/login_controller.dart';
 import 'package:final_project/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -12,10 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailClt = TextEditingController();
-
-  TextEditingController passwordClt = TextEditingController();
-
+  final LoginController loginController = Get.put(LoginController());
   bool _isobscure = true;
 
   @override
@@ -47,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 40.h),
               TextFormField(
-                controller: emailClt,
+                controller: loginController.emailClt,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -62,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 40.h),
               TextFormField(
                 obscureText: _isobscure,
-                controller: passwordClt,
+                controller: loginController.passwordClt,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -86,28 +85,30 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: 40.h),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => BottomNavBarScreen()),
-                  );
-                },
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16.sp,
-                    color: Colors.white,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffE36527),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 120.h,
-                    vertical: 8.w,
-                  ),
-                ),
+
+              Obx(
+                () => loginController.isLoading.value
+                    ? CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: () {
+                          loginController.login();
+                        },
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.sp,
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xffE36527),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 120.h,
+                            vertical: 8.w,
+                          ),
+                        ),
+                      ),
               ),
               SizedBox(height: 250.h),
               Text(

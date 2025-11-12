@@ -28,19 +28,19 @@ class _WellcomeScreenOnboardingState extends State<WellcomeScreenOnboarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Center(
-          child: Text(
-            "Welcome to my Blog Space",
-            style: TextStyle(
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
+      backgroundColor: Colors.brown,
+      // body: SafeArea(
+      //   child: Center(
+      //     child: Text(
+      //       "Welcome to my Blog Space",
+      //       style: TextStyle(
+      //         fontSize: 22.sp,
+      //         fontWeight: FontWeight.bold,
+      //         color: Colors.white,
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

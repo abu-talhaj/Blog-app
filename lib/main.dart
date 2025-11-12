@@ -3,6 +3,7 @@ import 'package:final_project/profile_screen_and_edit_oftion/profile_screen.dart
 import 'package:final_project/update_password/update_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return MaterialApp(home: child);
+        return GetMaterialApp(home: child);
       },
       child: const WellcomeScreenOnboarding(),
       //  child: const ProfileScreen(),

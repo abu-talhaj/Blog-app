@@ -1,5 +1,7 @@
+import 'package:final_project/login_register_logout_change_password_api/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -9,10 +11,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController usernameClt = TextEditingController();
-  TextEditingController emailClt = TextEditingController();
-  TextEditingController passwordClt = TextEditingController();
-  TextEditingController confirmClt = TextEditingController();
+
+  final RegisterController registerController = Get.put<RegisterController>(
+    RegisterController(),
+  );
+
   bool _isobscure = true;
   bool isobscure = true;
 
@@ -37,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 40.h),
               TextFormField(
-                controller: usernameClt,
+                controller: registerController.usernameClt,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -51,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               SizedBox(height: 40.h),
               TextFormField(
-                controller: emailClt,
+                controller: registerController.emailClt,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -66,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(height: 40.h),
               TextFormField(
                 obscureText: _isobscure,
-                controller: passwordClt,
+                controller: registerController.passwordClt,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -90,49 +93,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               SizedBox(height: 40.h),
+
               TextFormField(
-                obscureText: isobscure,
-                controller: confirmClt,
+                controller: registerController.phoneClt,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
                 decoration: InputDecoration(
-                  hintText: "Confirm your password",
-                  labelText: "Confirm Password",
+                  hintText: "Enter your phone number",
+                  labelText: "Phone",
                   border: OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isobscure = !isobscure;
-                      });
-                    },
-                    icon: Icon(
-                      isobscure
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                    ),
-                  ),
+                  suffixIcon: Icon(Icons.phone),
                 ),
               ),
               SizedBox(height: 90.h),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "Register",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16.sp,
-                    color: Colors.white,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffE36527),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 120.h,
-                    vertical: 8.w,
-                  ),
-                ),
+
+              Obx(
+                () => registerController.isLoading.value
+                    ? CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: () {
+                          registerController.register();
+                        },
+                        child: Text(
+                          "Register",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16.sp,
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xffE36527),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 120.h,
+                            vertical: 8.w,
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),
@@ -141,3 +140,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
+// SizedBox(height: 40.h),
+// TextFormField(
+//   obscureText: isobscure,
+//   controller: registerController.confirmClt,
+//   style: TextStyle(
+//     fontWeight: FontWeight.bold,
+//     color: Colors.white,
+//   ),
+//   decoration: InputDecoration(
+//     hintText: "Confirm your password",
+//     labelText: "Confirm Password",
+//     border: OutlineInputBorder(),
+//     suffixIcon: IconButton(
+//       onPressed: () {
+//         setState(() {
+//           isobscure = !isobscure;
+//         });
+//       },
+//       icon: Icon(
+//         isobscure
+//             ? Icons.visibility_off_outlined
+//             : Icons.visibility_outlined,
+//       ),
+//     ),
+//   ),
+// ),

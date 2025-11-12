@@ -3,9 +3,11 @@ import 'package:final_project/book_marks_screen/book_mark_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../blog_home_screen/posts_model.dart';
+
 class BlogDetailsScreen extends StatefulWidget {
-  final BlogModel blog;
-  const BlogDetailsScreen({super.key, required this.blog});
+  final Post post;
+  const BlogDetailsScreen({super.key, required this.post});
 
   @override
   State<BlogDetailsScreen> createState() => _BlogDetailsScreenState();
@@ -22,7 +24,7 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bh = widget.blog;
+    final bh = widget.post;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -35,16 +37,16 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
         actions: [
           InkWell(
             onTap: () {
-              setState(() {
-                if (bookmarkList.contains(widget.blog)) {
-                  bookmarkList.remove(widget.blog);
-                  isBookmark = false;
-                }
-                else{
-                  bookmarkList.add(widget.blog);
-                  isBookmark=true;
-                }
-              });
+              // setState(() {
+              //   if (bookmarkList.contains(widget.blog)) {
+              //     bookmarkList.remove(widget.blog);
+              //     isBookmark = false;
+              //   }
+              //   else{
+              //     bookmarkList.add(widget.blog);
+              //     isBookmark=true;
+              //   }
+              // });
             },
             child: Icon(
               love ? Icons.bookmark_add_sharp : Icons.bookmark_add_outlined,
@@ -62,8 +64,8 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                child: Image.asset(
-                  bh.image,
+                child: Image.network(
+                  bh.featuredImage,
                   height: 400.h,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -81,10 +83,14 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
               SizedBox(height: 10.h),
               ListTile(
                 leading: CircleAvatar(
-                  child: Image.asset(bh.image, height: 50.h, width: 25.w),
+                  child: Image.network(
+                    bh.featuredImage,
+                    height: 50.h,
+                    width: 25.w,
+                  ),
                 ),
                 title: Text(
-                  bh.listtiltetext,
+                  bh.title,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
@@ -92,7 +98,7 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                   ),
                 ),
                 subtitle: Text(
-                  bh.listtiltetexts,
+                  bh.excerpt,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
@@ -107,12 +113,14 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                   child: Column(
                     children: [
                       Text(
-                        bh.description,
+                        bh.content,
                         style: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                         ),
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 10.h),
                       Expanded(
@@ -170,49 +178,6 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                                 ),
                               ],
                             ),
-                            // ListView.builder(
-                            //   shrinkWrap: true,
-                            //   physics: NeverScrollableScrollPhysics(),
-                            //   itemCount: comments.length,
-                            //   itemBuilder: (context, index) {
-                            //     return ListTile(
-                            //       leading: CircleAvatar(),
-                            //       title: Text(comments[index]),
-                            //     );
-                            //   },
-                            // ),
-                            // Container(
-                            //   padding: EdgeInsets.symmetric(
-                            //     horizontal: 10.h,
-                            //     vertical: 7.w,
-                            //   ),
-                            //   child: Row(
-                            //     children: [
-                            //       Expanded(
-                            //         child: TextFormField(
-                            //           controller: commentController,
-                            //           decoration: InputDecoration(
-                            //             hintText: "Write a comments",
-                            //             border: InputBorder.none,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       IconButton(
-                            //         onPressed: () {
-                            //           if (commentController.text.trim().isEmpty)
-                            //             return;
-                            //           setState(() {
-                            //             comments.add(
-                            //               commentController.text.trim(),
-                            //             );
-                            //             commentController.clear();
-                            //           });
-                            //         },
-                            //         icon: Icon(Icons.send, color: Colors.green),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -227,3 +192,4 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
     );
   }
 }
+

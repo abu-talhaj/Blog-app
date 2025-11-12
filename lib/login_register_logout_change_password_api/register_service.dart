@@ -12,7 +12,9 @@ class RegisterService {
     );
     return response;
   }
+}
 
+class LoginService {
   Future<http.Response> postlogin(Map<String, dynamic> object) async {
     String url = "https://api.zhndev.site/wp-json/blog-app/v1/auth/login";
     http.Response response = await http.post(
@@ -22,7 +24,9 @@ class RegisterService {
     );
     return response;
   }
+}
 
+class LogoutService {
   Future<http.Response> postlogout(Map<String, dynamic> object) async {
     String url = "https://api.zhndev.site/wp-json/blog-app/v1/auth/logout";
     http.Response response = await http.post(
@@ -32,7 +36,9 @@ class RegisterService {
     );
     return response;
   }
+}
 
+class TokenRefresh {
   Future<http.Response> postRefreshtoken(Map<String, dynamic> object) async {
     String url =
         "https://api.zhndev.site/wp-json/blog-app/v1/auth/refresh-token";
