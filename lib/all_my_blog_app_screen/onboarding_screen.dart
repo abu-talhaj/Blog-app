@@ -1,4 +1,4 @@
-import 'package:final_project/login_screen/login_screen.dart';
+import 'package:final_project/all_my_blog_app_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

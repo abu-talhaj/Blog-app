@@ -1,4 +1,4 @@
-import 'package:final_project/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
+import 'package:final_project/all_my_blog_app_screen/bottom_nav_bar_screen.dart';
 import 'package:final_project/login_register_logout_change_password_api/login_model.dart';
 import 'package:final_project/login_register_logout_change_password_api/register_service.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class LoginController extends GetxController {
     Future<void> saveToken(String token)async{
      SharedPreferences sharedPreferences= await
      SharedPreferences.getInstance();
-     await sharedPreferences.setString("access_token", token);
+     await sharedPreferences.setString("token", token);
 
 
     }

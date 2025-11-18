@@ -1,4 +1,4 @@
-import 'package:final_project/blog_details_screen/blog_details_screen.dart';
+import 'package:final_project/all_my_blog_app_screen/blog_details_screen.dart';
 import 'package:final_project/blog_home_screen/blog_model.dart';
 import 'package:final_project/get_api_call_all/posts_controller.dart';
 import 'package:flutter/material.dart';

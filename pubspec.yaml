@@ -43,6 +43,7 @@ dependencies:
   sqflite:
   get:
   jwt_decoder:
+  comment_box: ^0.0.18
 
 
 dev_dependencies:

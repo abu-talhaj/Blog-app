@@ -1,9 +1,7 @@
-import 'package:final_project/blog_details_screen/blog_details_screen.dart';
-import 'package:final_project/book_marks_screen/book_mark_screen.dart';
-import 'package:final_project/profile_screen_and_edit_oftion/profile_screen.dart';
+import 'package:final_project/all_my_blog_app_screen/book_mark_screen.dart';
+import 'package:final_project/all_my_blog_app_screen/home_screen.dart';
+import 'package:final_project/all_my_blog_app_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../blog_home_screen/home_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({super.key});

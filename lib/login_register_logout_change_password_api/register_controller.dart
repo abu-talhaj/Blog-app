@@ -1,6 +1,6 @@
+import 'package:final_project/all_my_blog_app_screen/login_screen.dart';
 import 'package:final_project/login_register_logout_change_password_api/register_model.dart';
 import 'package:final_project/login_register_logout_change_password_api/register_service.dart';
-import 'package:final_project/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';

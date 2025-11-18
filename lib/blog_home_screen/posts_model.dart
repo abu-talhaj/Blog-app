@@ -91,7 +91,7 @@ class Post {
   int readTime;
   DateTime createdAt;
   DateTime updatedAt;
-  int likeCount;
+  dynamic likeCount;
   String commentCount;
   bool isLiked;
   bool isBookmarked;

@@ -1,3 +1,4 @@
+import 'package:final_project/all_my_blog_app_screen/login_screen.dart';
 import 'package:final_project/login_register_logout_change_password_api/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +12,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   final RegisterController registerController = Get.put<RegisterController>(
     RegisterController(),
   );
@@ -47,8 +47,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: "Enter your name",
-                  labelText: "Name",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: Icon(Icons.text_snippet_outlined),
                 ),
               ),
@@ -61,8 +65,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: "Enter your email",
-                  labelText: "Email",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: Icon(Icons.email),
                 ),
               ),
@@ -76,8 +84,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: "Enter your password",
-                  labelText: "Password",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -102,8 +114,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: "Enter your phone number",
-                  labelText: "Phone",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: Icon(Icons.phone),
                 ),
               ),
@@ -120,18 +136,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           "Register",
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             color: Colors.white,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xffE36527),
                           padding: EdgeInsets.symmetric(
-                            horizontal: 120.h,
-                            vertical: 8.w,
+                            horizontal: 140.h,
+                            vertical: 10.w,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                       ),
+              ),
+              SizedBox(height: 120.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Already have an account?",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(LoginScreen());
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(color: Colors.redAccent),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -140,6 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
+
 // SizedBox(height: 40.h),
 // TextFormField(
 //   obscureText: isobscure,

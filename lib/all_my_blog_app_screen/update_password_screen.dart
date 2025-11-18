@@ -1,6 +1,8 @@
+import 'package:final_project/login_register_logout_change_password_api/change_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
   const UpdatePasswordScreen({super.key});
@@ -18,6 +20,9 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   bool _isobscure = true;
   bool isobscure = true;
 
+  final ChangePasswordController changePasswordController = Get.put(
+    ChangePasswordController(),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +61,12 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 decoration: InputDecoration(
                   hintText: "Enter your current password",
                   labelText: "Current Password",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -82,7 +92,12 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 decoration: InputDecoration(
                   hintText: "Enter your new password",
                   labelText: "New Password",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -108,7 +123,12 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 decoration: InputDecoration(
                   hintText: "Enter your confirm password",
                   labelText: "Confirm Password",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -124,24 +144,52 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 ),
               ),
               SizedBox(height: 130.h),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "Update Password",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 12.sp,
-                    color: Colors.white,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffE36527),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 120.h,
-                    vertical: 8.w,
-                  ),
-                ),
-              ),
+              Obx(() {
+                return changePasswordController.isLoading.value
+                    ? CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: () {
+                          String current = currentpassclt.text.trim();
+                          String newp = newpassClt.text.trim();
+                          String confirm = confirmpassClt.text.trim();
+
+                          if (current.isEmpty) {
+                            Get.snackbar("_", "Enter current password");
+                          }
+
+                          if (newp.length < 8) {
+                            Get.snackbar("_", "Enter Eight Digits password");
+                          }
+                          if (confirm != newp) {
+                            Get.snackbar(
+                              "_",
+                              "Enter Eight Digits Confirm password",
+                            );
+                            return;
+                          }
+                          changePasswordController.UpDatePassword(
+                            current,
+                            newp,
+                            confirm,
+                          );
+                        },
+                        child: Text(
+                          "Update Password",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp,
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xffE36527),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 120.h,
+                            vertical: 8.w,
+                          ),
+                        ),
+                      );
+              }),
             ],
           ),
         ),

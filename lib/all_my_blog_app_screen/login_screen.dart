@@ -1,7 +1,5 @@
-import 'package:final_project/blog_home_screen/home_screen.dart';
-import 'package:final_project/bottom_nav_bar_screen/bottom_nav_bar_screen.dart';
+import 'package:final_project/all_my_blog_app_screen/register_screen.dart';
 import 'package:final_project/login_register_logout_change_password_api/login_controller.dart';
-import 'package:final_project/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -53,8 +51,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: "Enter your email",
-                  labelText: "Email",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: Icon(Icons.email),
                 ),
               ),
@@ -68,8 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 decoration: InputDecoration(
                   hintText: "Enter your password",
-                  labelText: "Password",
-                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Color(0xff292E38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
@@ -84,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 40.h),
+              SizedBox(height: 60.h),
 
               Obx(
                 () => loginController.isLoading.value
@@ -97,15 +103,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Login",
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             color: Colors.white,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xffE36527),
                           padding: EdgeInsets.symmetric(
-                            horizontal: 120.h,
-                            vertical: 8.w,
+                            horizontal: 140.h,
+                            vertical: 10.w,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                       ),
@@ -115,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 "Don't have an account?",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.red,
+                  color: Colors.grey,
                 ),
               ),
               TextButton(
@@ -129,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   "Sin Up",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Colors.grey,
                   ),
                 ),
               ),
