@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             final posts = postsController.postsList[index];
             return InkWell(
               onTap: () {
-                Get.to(BlogDetailsScreen(post: posts));
+                Get.to(BlogDetailsScreen(post: posts,));
               },
               child: Container(
                 padding: EdgeInsets.all(10.w),

@@ -1,5 +1,6 @@
 import 'package:final_project/all_my_blog_app_screen/blog_details_screen.dart';
 import 'package:final_project/blog_home_screen/blog_model.dart';
+import 'package:final_project/blog_home_screen/posts_model.dart';
 import 'package:final_project/book_marks_screen/favourite_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,7 +63,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                   return Card(
                     child: ListTile(
                       onTap: () {
-                        Get.to(BlogDetailsScreen(post: book));
+                        Get.to(BlogDetailsScreen(post:book,));
                       },
                       leading: Image.network(
                         book.featuredImage,
@@ -79,9 +80,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                       ),
                       trailing: IconButton(
                         onPressed: () {
-
                           favouriteToggle.togglebookmark(book);
-
                         },
                         icon: Icon(Icons.bookmark, color: Colors.red),
                       ),
