@@ -16,20 +16,24 @@ class BlogDetailsScreen extends StatefulWidget {
 }
 
 class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
-  final LikeApiController likeApiController = Get.put(LikeApiController());
   final FavouriteToggle favouriteToggle = Get.find<FavouriteToggle>();
   final CommentController commentControllerApi = Get.put(CommentController());
+
+  final LikeController likeController = Get.put(LikeController());
+
   final TextEditingController commentController = TextEditingController();
-  // Load comments for this post from API
+
   @override
   void initState() {
     super.initState();
     commentControllerApi.loadComments(widget.post.id);
+    likeController.loadLikes(widget.post.id);
   }
 
   @override
   Widget build(BuildContext context) {
     final bh = widget.post;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -102,29 +106,30 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             SizedBox(height: 10.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Row(
                   children: [
-                    Obx(
-                      () => IconButton(
-                        onPressed: () =>
-                            likeApiController.likes(bh.id, "token"),
+                    Obx(() {
+                      return IconButton(
+                        onPressed: () => likeController.toggle(widget.post.id),
                         icon: Icon(
-                          likeApiController.isLiked.value
+                          likeController.isLiked.value
                               ? Icons.favorite
                               : Icons.favorite_border,
-                          color: likeApiController.isLiked.value
+                          color: likeController.isLiked.value
                               ? Colors.red
                               : Colors.brown,
                         ),
-                      ),
-                    ),
+                      );
+                    }),
+
                     Obx(
                       () => Text(
-                        "${likeApiController.likesCount.value}",
+                        "${likeController.likeCount.value}",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -185,18 +190,21 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
               if (commentControllerApi.isLoading.value) {
                 return Center(child: CircularProgressIndicator());
               }
+
               if (commentControllerApi.comments.isEmpty) {
                 return Text(
                   "No comments yet",
                   style: TextStyle(color: Colors.white),
                 );
               }
+
               return ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: commentControllerApi.comments.length,
                 itemBuilder: (context, index) {
                   CommentModel comment = commentControllerApi.comments[index];
+
                   return ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.deepPurple,
